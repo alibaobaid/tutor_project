@@ -4,6 +4,7 @@ require 'shoulda/matchers'
 require 'support/factory_bot'
 require 'support/database_cleaner'
 require 'support/request_helpers'
+require 'support/controller_spec_helper'
 # require 'support/shoulda'
 
 ENV['RAILS_ENV'] ||= 'test'
@@ -38,7 +39,8 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 
-  config.include Requests::JsonHelpers, type: :request
+  # config.include ControllerSpecHelper
+  # config.include Requests::JsonHelpers
   # config.include Requests::AuthHelpers, type: :request
 
   Shoulda::Matchers.configure do |matchers|
@@ -77,8 +79,9 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.include Requests::JsonHelpers, type: :request
+  config.include Requests::JsonHelpers
   # config.include Requests::AuthHelpers, type: :request
+  config.include ControllerSpecHelper
 
   Shoulda::Matchers.configure do |matchers|
     matchers.integrate do |with|

@@ -22,6 +22,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'ransack'
 gem 'redis', '~> 4.0'
 gem 'smart_error'
+gem 'jwt'
 
 group :development do
   gem 'annotate'
@@ -35,7 +36,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'letter_opener'
   gem 'pry-rails'
-  gem 'rails-erd'
+  # gem 'rails-erd'
   gem 'rubocop', require: false
 
   gem 'database_cleaner'

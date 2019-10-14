@@ -3,12 +3,20 @@
 module ExceptionHandler
   extend ActiveSupport::Concern
 
+  class AuthenticationError < StandardError; end
+  class MissingToken < StandardError; end
+  class InvalidToken < StandardError; end
+
   included do
     # Handle all exceptions
     rescue_from StandardError,                      with: :server_error!
     rescue_from I18n::InvalidLocale,                with: :i18n_invalid_locale!
     rescue_from Consul::Powerless,                  with: :consul_powerless!
     rescue_from ActiveRecord::RecordNotFound,       with: :record_not_found!
+    rescue_from ActiveRecord::RecordInvalid, with: :four_twenty_two
+    rescue_from ExceptionHandler::AuthenticationError, with: :unauthorized_request
+    rescue_from ExceptionHandler::MissingToken, with: :four_twenty_two
+    rescue_from ExceptionHandler::InvalidToken, with: :four_twenty_two
   end
 
   # The message of record not found, can be customized by override it to the controllers
@@ -49,5 +57,15 @@ module ExceptionHandler
     end
 
     render_bad_request(error: 1000, data: data || {})
+  end
+
+  # JSON response with message; Status code 422 - unprocessable entity
+  def four_twenty_two(e)
+    json_response({ message: e.message }, :unprocessable_entity)
+  end
+
+  # JSON response with message; Status code 401 - Unauthorized
+  def unauthorized_request(e)
+    json_response({ message: e.message }, :unauthorized)
   end
 end
