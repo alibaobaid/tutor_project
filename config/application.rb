@@ -23,7 +23,7 @@ Bundler.require(*Rails.groups)
 
 module TutorProject
   class Application < Rails::Application
-    config.i18n.available_locales = %i[en ar]
+    config.i18n.available_locales = %i[en]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.middleware.use Rack::Attack
     # Initialize configuration defaults for originally generated Rails version.

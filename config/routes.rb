@@ -7,9 +7,14 @@ Rails.application.routes.draw do
     resources :countries do
       resources :cities
     end
+
     resources :levels
     resources :subjects
+    resources :users, only: %i[show index] do
+      get :avatar, on: :member
+    end
+
+    post 'signup', to: 'users#create'
   end
   post 'auth/login', to: 'authentication#authenticate'
-  post 'signup', to: 'users#create'
 end

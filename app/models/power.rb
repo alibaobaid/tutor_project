@@ -57,4 +57,12 @@ class Power
      :destroyable_subjects do
   Subject
   end
+  ######################## V1::UsersController #######################
+
+  power :users_index,
+        :users_show,
+        :creatable_users,
+        :avatar_show do
+  User
+  end
 end

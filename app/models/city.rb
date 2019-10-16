@@ -3,8 +3,9 @@ class City < ApplicationRecord
     
   # Association
   belongs_to :country
-
-  # validation
+  has_many :users, dependent: :destroy
+  
+  # Validation
   validates_presence_of :name
   validates :name, uniqueness: true
 end
