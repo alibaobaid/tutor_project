@@ -9,6 +9,8 @@ class V1::SubjectsController < V1::BaseController
     [:destroy] => :destroyable_subjects
   }, as: :subjects_scope
 
+  skip_before_action :authorize_request, only: :index
+
   ## ------------------------------------------------------------ ##
 
   # GET : /v1/subjects/
