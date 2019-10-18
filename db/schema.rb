@@ -73,11 +73,13 @@ ActiveRecord::Schema.define(version: 2019_10_15_110522) do
     t.string "email"
     t.string "password_digest"
     t.bigint "city_id", null: false
+    t.bigint "country_id"
     t.bigint "level_id"
     t.bigint "subject_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["city_id"], name: "index_users_on_city_id"
+    t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["level_id"], name: "index_users_on_level_id"
     t.index ["subject_id"], name: "index_users_on_subject_id"
   end
@@ -85,6 +87,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_110522) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cities", "countries"
   add_foreign_key "users", "cities"
+  add_foreign_key "users", "countries"
   add_foreign_key "users", "levels"
   add_foreign_key "users", "subjects"
 end

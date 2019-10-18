@@ -59,10 +59,18 @@ class Power
   end
   ######################## V1::UsersController #######################
 
-  power :users_index,
-        :users_show,
+  power :users_show,
         :creatable_users,
         :avatar_show do
   User
+  end
+
+  power :users_index do
+    User.with_role_type('tutor')
+  end
+
+  power :constants_roles_list,
+        :constants_gender_list do
+      true
   end
 end
