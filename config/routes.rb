@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resources :users, only: %i[show index] do
       get :avatar, on: :member
     end
-
+    get 'genders', to: 'constants#gender_list'
+    get 'roles_list', to: 'constants#roles_list'
+    
     post 'signup', to: 'users#create'
   end
   post 'auth/login', to: 'authentication#authenticate'

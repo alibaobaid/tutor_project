@@ -8,7 +8,33 @@ class V1::UsersController < V1::BaseController
 
   }, as: :users_scope
 
-  skip_before_action :authorize_request, only: :create
+  skip_before_action :authorize_request, only: [:create, :avatar]
+  # GET index
+  def index
+    @users = if params[:search].present?
+      User.joins(:country, :city, :subject, :level).where(
+        "
+          lower(country.name) LIKE :country OR
+          lower(city.name) LIKE :city OR
+          lower(level.name) LIKE :level OR
+          lower(subject.name) LIKE :subject
+        ",
+        country: "%#{params[:search][:country].downcase}%",
+        city: "%#{params[:search][:city].downcase}%",
+        subject: "%#{params[:search][:subject].downcase}%",
+        level: "%#{params[:search][:level].downcase}%"
+      )
+    else
+      users_scope
+    end
+    data = {
+      users: @users.as_api_response(:index),
+      pagination: pagination(collection)
+    }
+
+    render_success(data: data, message: index_message)
+  end
+  
   # POST /signup
   # return authenticated token upon signup
   def create
@@ -49,6 +75,7 @@ class V1::UsersController < V1::BaseController
       :bio,
       :role_type,
       :email,
+      :country_id,
       :city_id,
       :level_id,
       :subject_id,

@@ -14,6 +14,7 @@ module UserPresenter
       t.add :bio
       t.add :role_type
       t.add :email
+      t.add :country
       t.add :city
       t.add :level
       t.add :subject

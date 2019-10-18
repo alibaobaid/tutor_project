@@ -8,7 +8,7 @@ class V1::CountriesController < V1::BaseController
     [:update]  => :updatable_countries,
     [:destroy] => :destroyable_countries
   }, as: :countries_scope
-
+  skip_before_action :authorize_request, only: :index
   ## ------------------------------------------------------------ ##
 
   # GET : /v1/countries/

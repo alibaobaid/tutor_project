@@ -9,6 +9,7 @@ class V1::LevelsController < V1::BaseController
     [:destroy] => :destroyable_levels
   }, as: :levels_scope
 
+  skip_before_action :authorize_request, only: :index
   ## ------------------------------------------------------------ ##
 
   # GET : /v1/levels/

@@ -11,6 +11,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :password_digest
       t.references :city, null: false, foreign_key: true
+      t.references :country, null: true, foreign_key: true
       t.references :level, null: true, foreign_key: true
       t.references :subject, null: true, foreign_key: true
       t.timestamps
