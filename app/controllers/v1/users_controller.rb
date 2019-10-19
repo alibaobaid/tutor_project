@@ -8,7 +8,7 @@ class V1::UsersController < V1::BaseController
 
   }, as: :users_scope
 
-  skip_before_action :authorize_request, only: [:create, :avatar]
+  skip_before_action :authorize_request, only: [:create, :avatar, :index, :show]
   # GET index
   def index
     @users = if params[:search].present?
