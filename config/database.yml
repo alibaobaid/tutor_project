@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: aliamrah
+  password: 714534169
+  host: localhost
+
+development:
+  <<: *default
+  database: tutor_project_db_dev
+
+
+test:
+  <<: *default
+  database: tutor_project_db_test
+
+production:
+  <<: *default
+  database: tutor_project_db_production
+  username: tutor_project
+  password: <%= ENV['TUTOR_PROJECT_DATABASE_PASSWORD'] %>
