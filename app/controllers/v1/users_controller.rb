@@ -34,7 +34,7 @@ class V1::UsersController < V1::BaseController
 
     render_success(data: data, message: index_message)
   end
-  
+
   # POST /signup
   # return authenticated token upon signup
   def create
@@ -44,8 +44,10 @@ class V1::UsersController < V1::BaseController
     # json_response(response, :created)
     # render_created(data: response, message: created_message)
     if user.save
-      auth_token = AuthenticateUser.new(user.email, user.password).call
-      user = { user: user.as_api_response(:show), auth_token: auth_token }
+      # auth_token = AuthenticateUser.new(user.email, user.password).call
+      user = { user: user.as_api_response(:show) }
+      # user = { user: user.as_api_response(:show), auth_token: auth_token }
+
       render_created(data: user, message: created_message)
     else
       render_unprocessable_entity(error: user)
@@ -55,7 +57,7 @@ class V1::UsersController < V1::BaseController
   # GET /avatar
   def avatar
     user = User.find_by(id: params[:id])
-  
+
     if user&.avatar&.attached?
       redirect_to rails_blob_url(user.avatar)
     else
