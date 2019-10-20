@@ -44,9 +44,8 @@ class V1::UsersController < V1::BaseController
     # json_response(response, :created)
     # render_created(data: response, message: created_message)
     if user.save
-      # auth_token = AuthenticateUser.new(user.email, user.password).call
-      user = { user: user.as_api_response(:show) }
-      # user = { user: user.as_api_response(:show), auth_token: auth_token }
+      auth_token = AuthenticateUser.new(user.email, user.password).call
+      user = { user: user.as_api_response(:show), auth_token: auth_token }
 
       render_created(data: user, message: created_message)
     else
