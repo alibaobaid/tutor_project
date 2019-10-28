@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
     resources :levels
     resources :subjects
-    resources :users, only: %i[show index] do
+    resources :users, only: %i[show update index] do
       get :avatar, on: :member
     end
     get 'genders', to: 'constants#gender_list'
