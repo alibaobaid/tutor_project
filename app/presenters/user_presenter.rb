@@ -14,10 +14,15 @@ module UserPresenter
       t.add :bio
       t.add :role_type
       t.add :email
-      t.add :country
-      t.add :city
-      t.add :level
-      t.add :subject
+      t.add :country_id
+      t.add :country_name
+      t.add :city_id
+      t.add :city_name
+      t.add :level_id
+      t.add :level_name
+      t.add :subject_id
+      t.add :subject_name
+      t.add :avatar_url, as: :avatar
     end
 
     api_accessible :index, extend: :base
@@ -32,10 +37,17 @@ module UserPresenter
       t.add :bio
       t.add :role_type
       t.add :email
+      t.add :phone_number
       t.add :country_id
+      t.add :country_name
       t.add :city_id
+      t.add :city_name
       t.add :level_id
+      t.add :level_name
       t.add :subject_id
+      t.add :subject_name
+      t.add :can_update_profile?, as: :can_update_profile
+      t.add :avatar_url, as: :avatar
     end
   end
 end

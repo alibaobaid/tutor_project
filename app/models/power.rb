@@ -60,6 +60,7 @@ class Power
   ######################## V1::UsersController #######################
 
   power :users_show,
+        :users_update,
         :creatable_users,
         :avatar_show do
   User
