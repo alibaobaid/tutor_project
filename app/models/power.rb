@@ -68,6 +68,13 @@ class Power
 
   power :users_index do
     User.with_role_type('tutor')
+        .includes(
+          :city,
+          :country,
+          :subject,
+          :level,
+          :avatar_attachment
+        )
   end
 
   power :constants_roles_list,

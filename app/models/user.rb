@@ -49,19 +49,19 @@ class User < ApplicationRecord
   end
 
   def country_name
-    country.name
+    self.country.name
   end
 
   def city_name
-    city.name
+    self.city.name
   end
 
   def level_name
-    level.name
+    self.level.name
   end
 
   def subject_name
-    subject.name
+    self.subject.name
   end
 
   private

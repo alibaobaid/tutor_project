@@ -13,7 +13,18 @@ class V1::UsersController < V1::BaseController
   # GET index
   def index
     @users = if params[:search].present?
-      User.joins(:country, :city, :subject, :level)
+      User.includes(
+            :city,
+            :country,
+            :subject,
+            :level,
+            :avatar_attachment
+          ).joins(
+            :country,
+            :city,
+            :subject,
+            :level
+          )
           .where(
             "
               lower(countries.name) LIKE :country OR
