@@ -81,4 +81,19 @@ class Power
         :constants_gender_list do
       true
   end
+
+  ######################## V1::NotificationsController #######################
+
+  power :notifications_index do
+    Notification.includes(:sender)
+                .receiver(current_user.id)
+  end
+  power :creatable_notifications do
+    Notification.sender(current_user.id)
+  end
+  
+  power :notifications_show,
+        :destroyable_notifications  do
+    Notification.includes(:sender)
+  end
 end

@@ -8,7 +8,6 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   GENDER = { male: 1, female: 2 }
-
   ROLE_TYPES = { tutor: 1, student: 2 }
   STATUS = { active: 1, inactive: 2 }
 
@@ -62,6 +61,12 @@ class User < ApplicationRecord
 
   def subject_name
     self.subject.name
+  end
+
+  def new_notification_count
+    Notification.receiver(User.current.id)
+                .not_readed
+                .count
   end
 
   private
