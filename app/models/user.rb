@@ -74,5 +74,4 @@ class User < ApplicationRecord
   def avatar_present?
     errors.add(:avatar, :blank) unless avatar.attached?
   end
-
 end
