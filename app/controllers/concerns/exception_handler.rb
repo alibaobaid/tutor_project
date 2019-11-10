@@ -6,6 +6,7 @@ module ExceptionHandler
   class AuthenticationError < StandardError; end
   class MissingToken < StandardError; end
   class InvalidToken < StandardError; end
+  class ResetPasswordError < StandardError; end
 
   included do
     # Handle all exceptions
@@ -17,6 +18,8 @@ module ExceptionHandler
     rescue_from ExceptionHandler::AuthenticationError, with: :unauthorized_request
     rescue_from ExceptionHandler::MissingToken, with: :four_twenty_two
     rescue_from ExceptionHandler::InvalidToken, with: :four_twenty_two
+    rescue_from ResetPasswordError, with: :not_authorized
+
   end
 
   # The message of record not found, can be customized by override it to the controllers
@@ -67,5 +70,9 @@ module ExceptionHandler
   # JSON response with message; Status code 401 - Unauthorized
   def unauthorized_request(e)
     json_response({ message: e.message }, :unauthorized)
+  end
+
+  def not_authorized
+    json_response({ error: 'Not authorized' }, status: :unauthorized)
   end
 end
