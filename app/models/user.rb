@@ -20,8 +20,11 @@ class User < ApplicationRecord
 
   # Validations
   validates_presence_of :first_name, :last_name, :email, :password_digest, :role_type
-  validates_uniqueness_of :email
-  validate :avatar_present?
+  validates :email,
+            format: { with: URI::MailTo::EMAIL_REGEXP },
+            presence: true,
+            uniqueness: { case_sensitive: false }
+  # validate :avatar_present?
   enumerize :role_type, in: ROLE_TYPES, scope: true, predicates: { prefix: true }
   enumerize :gender, in: GENDER, scope: true, predicates: { prefix: true }
   enumerize :status, in: STATUS, scope: true, predicates: { prefix: true }
@@ -63,15 +66,29 @@ class User < ApplicationRecord
     self.subject.name
   end
 
-  def new_notification_count
+  def new_notification_count  
     Notification.receiver(User.current.id)
                 .not_readed
                 .count
   end
 
+  def generate_password_token!
+    begin
+      self.reset_password_token = SecureRandom.urlsafe_base64
+    end while User.exists?(reset_password_token: self.reset_password_token)
+    self.reset_password_token_expires_at = 1.day.from_now
+    save!
+  end
+
+  def clear_password_token!
+    self.reset_password_token = nil
+    self.reset_password_token_expires_at = nil
+    save!
+  end
+
   private
 
-  def avatar_present?
-    errors.add(:avatar, :blank) unless avatar.attached?
-  end
+  # def avatar_present?
+  #   errors.add(:avatar, :blank) unless avatar.attached?
+  # end
 end

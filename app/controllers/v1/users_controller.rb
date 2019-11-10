@@ -53,6 +53,7 @@ class V1::UsersController < V1::BaseController
   def create
     user = User.new(user_params)
     if user.save
+      User.current = user
       auth_token = AuthenticateUser.new(user.email, user.password).call
       user = { user: user.as_api_response(:show), auth_token: auth_token }
 
