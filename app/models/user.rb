@@ -42,13 +42,13 @@ class User < ApplicationRecord
     User.current == self
   end
 
-  def avatar_url
-    avatar.attached? ? url : ''
-  end
+  # def avatar_url
+  #   avatar.attached? ? url : ''
+  # end
 
-  def url
-    Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true)
-  end
+  # def url
+  #   Rails.application.routes.url_helpers.rails_blob_path(avatar, only_path: true)
+  # end
 
   def country_name
     self.country.name

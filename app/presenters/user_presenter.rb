@@ -22,7 +22,7 @@ module UserPresenter
       t.add :level_name
       t.add :subject_id
       t.add :subject_name
-      t.add :avatar_url, as: :avatar
+      # t.add :avatar_url, as: :avatar
     end
 
     api_accessible :index, extend: :base
@@ -47,7 +47,7 @@ module UserPresenter
       t.add :subject_id
       t.add :subject_name
       t.add :can_update_profile?, as: :can_update_profile
-      t.add :avatar_url, as: :avatar
+      # t.add :avatar_url, as: :avatar
       t.add :new_notification_count
     end
   end

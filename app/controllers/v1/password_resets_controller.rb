@@ -1,8 +1,6 @@
 class V1::PasswordResetsController < ApplicationController
   skip_before_action :authorize_request
   before_action :set_user, only: [:edit, :update]
-  KEYS = [:password, :password_confirmation].freeze
-
 
   def create
     user = User.find_by(email: params[:email])
@@ -26,7 +24,10 @@ class V1::PasswordResetsController < ApplicationController
   private
   
   def password_params
-    params.tap { |p| p.require(KEYS) }.permit(*KEYS)
+    params.require(:user).permit(
+      :password,
+      :password_confirmation
+    )
   end
 
   def set_user
