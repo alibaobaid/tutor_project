@@ -51,19 +51,19 @@ class User < ApplicationRecord
   # end
 
   def country_name
-    self.country.name
+    self.country&.name
   end
 
   def city_name
-    self.city.name
+    self.city&.name
   end
 
   def level_name
-    self.level.name
+    self.level&.name
   end
 
   def subject_name
-    self.subject.name
+    self.subject&.name
   end
 
   def new_notification_count  
