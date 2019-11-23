@@ -24,6 +24,7 @@ class User < ApplicationRecord
             format: { with: URI::MailTo::EMAIL_REGEXP },
             presence: true,
             uniqueness: { case_sensitive: false }
+  
   # validate :avatar_present?
   enumerize :role_type, in: ROLE_TYPES, scope: true, predicates: { prefix: true }
   enumerize :gender, in: GENDER, scope: true, predicates: { prefix: true }

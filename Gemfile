@@ -23,6 +23,8 @@ gem 'ransack'
 gem 'redis', '~> 4.0'
 gem 'smart_error'
 gem 'jwt'
+gem 'figaro'
+
 
 group :development do
   gem 'annotate'

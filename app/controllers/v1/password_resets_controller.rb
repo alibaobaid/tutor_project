@@ -7,9 +7,10 @@ class V1::PasswordResetsController < ApplicationController
     if user
       user.generate_password_token!
       UserMailer.reset_password(user).deliver_now
+      render json: :ok
+    else 
+      render_not_found
     end
-
-    render json: :ok
   end
 
   def edit

@@ -31,3 +31,6 @@
 /config/master.production.key
 /.env
 erd.pdf
+
+# Ignore application configuration
+/config/application.yml
