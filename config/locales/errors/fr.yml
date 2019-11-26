@@ -1,0 +1,21 @@
+fr:
+  errors:
+    # 10XX : Main App Errors
+    '1000': "Erreur du serveur! S'il vous plaît contacter l'administration" # Global Error
+    '1001': "Les en-têtes sont manquants"
+    '1002': "Les informations sur l'application sont manquantes"
+    '1003': "Le numéro de page ou la limite est incorrecte"
+    '1004': 'Langue invalide'
+    '1005': 'Fuseau horaire invalide'
+    '1006': "Vous avez dépassé le nombre maximal de demandes par minute. Veuillez réessayer plus tard."
+
+    # 11XX : Http Errors
+    '1101': 'Non autorisé'
+    '1102': 'Non autorisé à entrer'
+    '1103': 'Les données ne sont pas traitées'
+    '1104': "L'authentification a échoué"
+    '1105': 'Ne existe pas'
+
+  activerecord:
+    errors:
+      messages:
