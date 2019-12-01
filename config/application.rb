@@ -14,7 +14,7 @@ require 'action_mailbox/engine'
 require 'action_text/engine'
 require 'action_view/railtie'
 require 'action_cable/engine'
-# require "sprockets/railtie"
+require "sprockets/railtie"
 require 'rails/test_unit/railtie'
 
 # Require the gems listed in Gemfile, including any gems
@@ -28,6 +28,11 @@ module TutorProject
     config.i18n.default_locale = :en
     # config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**/*.{rb,yml}').to_s]
     config.middleware.use Rack::Attack
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Flash
+    config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::Session::CookieStore, {:key=>"_tutor_project_session"}
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 

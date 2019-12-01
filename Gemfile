@@ -24,6 +24,7 @@ gem 'redis', '~> 4.0'
 gem 'smart_error'
 gem 'jwt'
 gem 'figaro'
+gem 'rails_admin', '~> 2.0'
 
 
 group :development do
