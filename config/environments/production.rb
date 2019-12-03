@@ -116,6 +116,9 @@ Rails.application.configure do
     user_name:            ENV["GMAIL_USERNAME"],
     password:             ENV["GMAIL_PASSWORD"]
   }
+
+  config.assets.precompile += %w(rails_admin/rails_admin.css rails_admin/rails_admin.js)
+
   #
   # By default Rails will store a last write timestamp in the session. The
   # DatabaseSelector middleware is designed as such you can define your own
