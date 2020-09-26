@@ -9,17 +9,13 @@ class V1::UsersController < V1::BaseController
 
   }, as: :users_scope
 
-  skip_before_action :authorize_request, only: :create
+  skip_before_action :authorize_request, only: [:create, :index]
   # GET index
   def index
-    @users = if params[:search].present?
-      User.includes(
-            :city,
-            :country,
-            :subject,
-            :level,
-            :avatar_attachment
-          ).joins(
+    @users = \
+      if params[:search].present?
+        users_scope
+          .joins(
             :country,
             :city,
             :subject,
@@ -37,9 +33,10 @@ class V1::UsersController < V1::BaseController
             subject: "%#{params[:search][:subject]&.downcase}%",
             level: "%#{params[:search][:level]&.downcase}%"
           )
-    else
-      users_scope
-    end
+      else
+        users_scope
+      end
+
     data = {
       users: @users.as_api_response(:index),
       pagination: pagination(collection)
@@ -63,7 +60,7 @@ class V1::UsersController < V1::BaseController
     end
   end
 
- # PUT : /v1/users/:id
+  # PUT : /v1/users/:id
   def update
     user = User.find(params[:id])
     if user.update(user_update_params)

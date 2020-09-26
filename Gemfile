@@ -25,7 +25,7 @@ gem 'smart_error'
 gem 'jwt'
 gem 'figaro'
 gem 'rails_admin', '~> 2.0'
-
+gem "aws-sdk-s3", require: false
 
 group :development do
   gem 'annotate'

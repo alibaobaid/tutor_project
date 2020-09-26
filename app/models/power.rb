@@ -17,45 +17,42 @@ class Power
     end
   end
   ######################## CountriesController #######################
-  
   power :countries_index,
-  :countries_show,
-  :creatable_countries,
-  :updatable_countries,
-  :destroyable_countries do
-  Country
+        :countries_show,
+        :creatable_countries,
+        :updatable_countries,
+        :destroyable_countries do
+    Country
   end
-  
+
   ######################## CitiesController #######################
-  
+
   power :cities_index,
-     :cities_show,
-     :creatable_cities,
-     :updatable_cities,
-     :destroyable_cities do
-  Country.find(params[:country_id])&.
+        :cities_show,
+        :creatable_cities,
+        :updatable_cities,
+        :destroyable_cities do
+    Country.find(params[:country_id])&.
          cities
   end
-  
+
   ######################## V1::LevelsController #######################
-  
+
   power :levels_index,
-     :levels_show,
-     :creatable_levels,
-     :updatable_levels,
-     :updatable_levels,
-     :destroyable_levels do
-  Level
+        :levels_show,
+        :creatable_levels,
+        :updatable_levels,
+        :updatable_levels,
+        :destroyable_levels do
+    Level
   end
-  
   ######################## V1::SubjectsController #######################
-  
   power :subjects_index,
-     :subjects_show,
-     :creatable_subjects,
-     :updatable_subjects,
-     :destroyable_subjects do
-  Subject
+        :subjects_show,
+        :creatable_subjects,
+        :updatable_subjects,
+        :destroyable_subjects do
+    Subject
   end
   ######################## V1::UsersController #######################
 
@@ -63,7 +60,7 @@ class Power
         :users_update,
         :creatable_users,
         :avatar_show do
-  User
+    User
   end
 
   power :users_index do
@@ -72,14 +69,13 @@ class Power
           :city,
           :country,
           :subject,
-          :level,
-          :avatar_attachment
+          :level
         )
   end
 
   power :constants_roles_list,
         :constants_gender_list do
-      true
+    true
   end
 
   ######################## V1::NotificationsController #######################
@@ -88,10 +84,11 @@ class Power
     Notification.includes(:sender)
                 .receiver(current_user.id)
   end
+  
   power :creatable_notifications do
     Notification.sender(current_user.id)
   end
-  
+
   power :notifications_show,
         :destroyable_notifications  do
     Notification.includes(:sender)
